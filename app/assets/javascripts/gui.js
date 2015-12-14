@@ -109,6 +109,7 @@ var editor = CodeMirror.fromTextArea(commandsElm, {
 
 // Load a db from a file
 dbFileElm.onchange = function() {
+  debugger;
   var f = dbFileElm.files[0];
   var r = new FileReader();
   r.onload = function() {
@@ -131,6 +132,7 @@ dbFileElm.onchange = function() {
 
 // Save the db to a file
 function savedb () {
+  debugger;
   worker.onmessage = function(event) {
     toc("Exporting the database");
     var arraybuff = event.data.buffer;

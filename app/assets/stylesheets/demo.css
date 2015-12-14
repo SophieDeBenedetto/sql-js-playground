@@ -61,7 +61,7 @@ h1 {
 
 #output {
   overflow: auto;
-  height: 160px;
+  height: 300px;
   width: 1000px;
   margin-left: 0px;
 }
