@@ -78,11 +78,9 @@ var tableCreate = function () {
 
 // Execute the commands when the button is clicked
 function execEditorContents () {
-  debugger;
   noerror()
   execute (editor.getValue() + ';');
 }
-debugger;
 execBtn.addEventListener("click", execEditorContents, true);
 
 // Performance measurement functions

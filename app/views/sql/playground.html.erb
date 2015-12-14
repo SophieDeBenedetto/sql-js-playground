@@ -6,13 +6,14 @@
 </head>
 <body>
 
-
+<div class="col-md-5 col-md-offset-2">
+<div class="header col-md-6 col-md-offset-7" style="width: 380px;">
   <h1>SQL.js Playground</h1>
 
 <main>
-    <label for='commands'>Enter some SQL</label>
+    <label for='commands' style="margin-left: 100px;">Enter some SQL</label>
     <br>
-
+</div>
     <textarea id="commands" class="CodeMirror" style="height: 300px;">
 DROP TABLE IF EXISTS employees;
 CREATE TABLE employees( id          integer,  name    text,
@@ -38,15 +39,17 @@ CREATE TABLE employees( id          integer,  name    text,
 SELECT designation,COUNT(*) AS nbr, (AVG(salary)) AS avg_salary FROM employees GROUP BY designation ORDER BY avg_salary DESC;
 SELECT name,hired_on FROM employees ORDER BY hired_on;</textarea>
 
-<button id="execute" class="button">Execute</button>
-<button id='savedb'  class="button">Save the db</button>
-<label class="button">Load an SQLite database file: <input type='file' id='dbfile' ></label>
+<div id="buttons" style="margin-top: 25px; margin-bottom: 25px;" class="col-md-12 col-md-offset-6">
+<button id="execute" class="btn btn-primary" style="margin-right: 10px;">Execute</button>
+<button id='savedb'  class="btn btn-primary" style="margin-right: 10px;">Save the db</button>
+<label>Load an SQLite database file: <input type='file' id='dbfile' ></label>
+</div>
 
 <div id="error" class="error"></div>
 
-<pre id="output">Results will be displayed here</pre>
+<pre id="output" class="col-md-12 col-md-offset-6" style="width: 970px;">Results:</pre>
 </main>
 
-
+</div>
 </body>
 </html>
