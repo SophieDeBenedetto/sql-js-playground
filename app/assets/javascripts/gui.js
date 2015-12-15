@@ -32,7 +32,7 @@ function noerror() {
 
 // Run a command in the database
 function execute(commands) {
-  var db = new SQL.Database();
+  window.db = new SQL.Database();
   db.run(commands);
   var query = commands.split(/(?=SELECT)/)[1]
   var results = db.exec(query);
