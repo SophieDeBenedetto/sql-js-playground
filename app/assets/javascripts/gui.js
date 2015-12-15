@@ -37,7 +37,6 @@ function execute(commands) {
   var query = commands.split(/(?=SELECT)/)[1]
   var results = db.exec(query);
   for (var i=0; i<results.length; i++) {
-    debugger
     $("#output").html(" ");
     outputElm.appendChild(tableCreate(results[i].columns, results[i].values));
   }

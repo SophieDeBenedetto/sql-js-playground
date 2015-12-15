@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require codemirror
 //= require codemirror/modes/sql
-//= require_tree .
+//= require sql
+//= require gui
+
