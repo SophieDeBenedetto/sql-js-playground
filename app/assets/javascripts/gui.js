@@ -32,12 +32,13 @@ function noerror() {
 
 // Run a command in the database
 function execute(commands) {
-  debugger;
   var db = new SQL.Database();
   db.run(commands);
   var query = commands.split(/(?=SELECT)/)[1]
   var results = db.exec(query);
   for (var i=0; i<results.length; i++) {
+    debugger
+    $("#output").html(" ");
     outputElm.appendChild(tableCreate(results[i].columns, results[i].values));
   }
 }
@@ -65,6 +66,7 @@ function execEditorContents () {
   if (db) {
     var results = db.exec(editor.getValue() + ';')
     for (var i=0; i<results.length; i++) {
+      $("#output").html(" ");
       outputElm.appendChild(tableCreate(results[i].columns, results[i].values));
     };
   } else {
