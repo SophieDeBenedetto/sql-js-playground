@@ -32,6 +32,7 @@ function noerror() {
 
 // Run a command in the database
 function execute(commands) {
+  debugger;
   var db = new SQL.Database();
   db.run(commands);
   var query = commands.split(/(?=SELECT)/)[1]
@@ -79,7 +80,14 @@ var tableCreate = function () {
 // Execute the commands when the button is clicked
 function execEditorContents () {
   noerror()
-  execute (editor.getValue() + ';');
+  if (db) {
+    var results = db.exec(editor.getValue() + ';')
+    for (var i=0; i<results.length; i++) {
+      outputElm.appendChild(tableCreate(results[i].columns, results[i].values));
+    };
+  } else {
+    execute (editor.getValue() + ';');
+  };
 }
 execBtn.addEventListener("click", execEditorContents, true);
 
@@ -109,30 +117,45 @@ var editor = CodeMirror.fromTextArea(commandsElm, {
 
 // Load a db from a file
 dbFileElm.onchange = function() {
-  debugger;
+  // var db = new SQL.Database();
   var f = dbFileElm.files[0];
   var r = new FileReader();
+
+  editor.setValue("");
+  // var commands = editor.getValue() + ';';
+  // db.exec(commands);  
+  // debugger;
   r.onload = function() {
-    worker.onmessage = function () {
-      toc("Loading database from file");
-      // Show the schema of the loaded database
-      editor.setValue("SELECT `name`, `sql`\n  FROM `sqlite_master`\n  WHERE type='table';");
-      execEditorContents();
-    };
-    tic();
-    try {
-      worker.postMessage({action:'open',buffer:r.result}, [r.result]);
+        var Uints = new Uint8Array(r.result);
+        db = new SQL.Database(Uints);
     }
-    catch(exception) {
-      worker.postMessage({action:'open',buffer:r.result});
-    }
-  }
   r.readAsArrayBuffer(f);
-}
+  // r.onload = function(e) {
+  //   debugger;
+  //   var contents = e.target.result;
+  // };
+  // debugger;
+  // r.readAsText(f);
+  //   worker.onmessage = function () {
+  //     toc("Loading database from file");
+  //     // Show the schema of the loaded database
+  //     editor.setValue("SELECT `name`, `sql`\n  FROM `sqlite_master`\n  WHERE type='table';");
+  //     execEditorContents();
+  //   };
+  //   tic();
+  //   try {
+  //     worker.postMessage({action:'open',buffer:r.result}, [r.result]);
+  //   }
+  //   catch(exception) {
+  //     worker.postMessage({action:'open',buffer:r.result});
+  //   }
+  // }
+  // r.readAsArrayBuffer(f);
+  // };
+};
 
 // Save the db to a file
 function savedb () {
-  debugger;
   worker.onmessage = function(event) {
     toc("Exporting the database");
     var arraybuff = event.data.buffer;
