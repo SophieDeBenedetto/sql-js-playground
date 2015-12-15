@@ -62,7 +62,7 @@ var tableCreate = function () {
 // Execute the commands when the button is clicked
 function execEditorContents () {
   noerror()
-  if (db) {
+  if (window.db) {
     var results = db.exec(editor.getValue() + ';')
     for (var i=0; i<results.length; i++) {
       $("#output").html(" ");
@@ -98,7 +98,7 @@ dbFileElm.onchange = function() {
   editor.setValue("");
   r.onload = function() {
         var Uints = new Uint8Array(r.result);
-        db = new SQL.Database(Uints);
+        window.db = new SQL.Database(Uints);
     }
   r.readAsArrayBuffer(f);
   
