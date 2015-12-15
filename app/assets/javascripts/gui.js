@@ -106,17 +106,17 @@ dbFileElm.onchange = function() {
 };
 
 // Save the db to a file
-function savedb () {
-  debugger;
-  worker.onmessage = function(event) {
-    toc("Exporting the database");
-    var arraybuff = event.data.buffer;
-    var blob = new Blob([arraybuff]);
-    var url = window.URL.createObjectURL(blob);
-    window.location = url;
-  };
-  tic();
-  worker.postMessage({action:'export'});
-}
-savedbElm.addEventListener("click", savedb, true);
+// function savedb () {
+//   debugger;
+//   worker.onmessage = function(event) {
+//     toc("Exporting the database");
+//     var arraybuff = event.data.buffer;
+//     var blob = new Blob([arraybuff]);
+//     var url = window.URL.createObjectURL(blob);
+//     window.location = url;
+//   };
+//   tic();
+//   worker.postMessage({action:'export'});
+// }
+// savedbElm.addEventListener("click", savedb, true);
 });
